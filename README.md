@@ -3,8 +3,7 @@
 Treat is the English-facing website for XiaDianxin. This repo now builds a
 Remix + Vite marketing site that borrows the app's actual visual language:
 HarmonyOS Sans, Semi Design components, indigo glass surfaces, mascot-driven
-warmth, and a brighter editorial contrast inspired by
-`reference/charm-reference.html`.
+warmth, and a brighter editorial contrast inspired by https://charm.land.
 
 ## Stack
 
