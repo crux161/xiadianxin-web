@@ -1,112 +1,144 @@
-import { motion } from "framer-motion";
-import { Button, Dropdown, Typography } from "@douyinfe/semi-ui";
-import { IconChevronDown, IconDownload, IconArrowRight } from "@douyinfe/semi-icons";
+import { motion } from "framer-motion";
+import { Button, Typography, Space } from "@douyinfe/semi-ui";
+import { IconArrowRight, IconMoon, IconSun } from "@douyinfe/semi-icons";
 import { Link } from "@remix-run/react";
+
 import appIcon from "../../reference/icons/web/Favicons (IMG_6739)/favicon-192.png";
 import kenChanImg from "../../reference/images/ken-chan/koken-CNY-red.jpeg";
+import { useTreatSiteStore } from "../lib/site-store";
 
 const { Title, Text, Paragraph } = Typography;
 
 export default function LandingPage() {
+  const scene = useTreatSiteStore((store) => store.scene);
+  const setScene = useTreatSiteStore((store) => store.setScene);
+
   return (
-    <div className="qq-landing-body min-h-screen flex flex-col relative overflow-hidden bg-white">
-      {/* Shimmering Breeze Background */}
-      <div className="breeze-bg">
-        <div className="orb" style={{ background: 'rgba(0, 164, 255, 0.12)', top: '-5%', left: '5%' }} />
-        <div className="orb" style={{ background: 'rgba(255, 177, 27, 0.1)', bottom: '0%', right: '5%', animationDelay: '-4s' }} />
-        <div className="orb" style={{ background: 'rgba(254, 123, 112, 0.08)', top: '40%', right: '-10%', animationDelay: '-8s' }} />
+    <div id="site-root" data-scene={scene} className="qq-landing-body">
+
+      {/* Huawei Iridescent / Twilight Vertical Light Beams */}
+      <div className="shimmer-container">
+        <div className="beam beam-1" />
+        <div className="beam beam-2" />
+        <div className="beam beam-3" />
+        <div className="beam beam-4" />
       </div>
 
       {/* Glass Navigation */}
-      <nav className="flex items-center justify-between px-10 py-6 z-20">
-        <div className="flex items-center gap-3">
-          <img src={appIcon} className="h-9 w-9 rounded-xl" alt="Koken" />
-          <Text className="text-xl font-bold tracking-tight text-black">koken.dev</Text>
+      <nav className="glass-nav sticky top-0 flex items-center justify-between px-10 py-5 z-20 transition-all duration-500">
+        <div className="flex items-center gap-4">
+          <img src={appIcon} className="h-10 w-10 rounded-[14px] shadow-sm" alt="Koken" />
+          <Text className="text-xl font-extrabold tracking-tight" style={{ color: 'var(--text-main)' }}>
+            koken.dev
+          </Text>
         </div>
 
-        <div className="hidden md:flex items-center gap-8">
-          <Dropdown
-            render={
-              <Dropdown.Menu>
-                <Dropdown.Item>Treat v2.0</Dropdown.Item>
-                <Dropdown.Item>Desktop Client</Dropdown.Item>
-                <Dropdown.Item>Mobile Hub</Dropdown.Item>
-              </Dropdown.Menu>
-            }
+        <div className="hidden md:flex items-center gap-10">
+          <a href="#" className="font-bold transition-opacity hover:opacity-100" style={{ color: 'var(--text-main)', opacity: 0.6 }}>Products</a>
+          <a href="#" className="font-bold transition-opacity hover:opacity-100" style={{ color: 'var(--text-main)', opacity: 0.6 }}>Community</a>
+        </div>
+
+        <div className="flex gap-4 items-center">
+          {/* Theme Toggle for Pearlescent vs Twilight */}
+          <button
+            onClick={() => setScene(scene === 'paper' ? 'midnight' : 'paper')}
+            className="w-10 h-10 rounded-full flex items-center justify-center transition hover:bg-black/5 dark:hover:bg-white/10"
+            style={{ color: 'var(--text-main)' }}
           >
-            <span className="nav-link cursor-pointer flex items-center gap-1 text-sm">
-              Products <IconChevronDown size="small" />
-            </span>
-          </Dropdown>
-          <a href="#" className="nav-link text-sm">Masvots</a>
-          <a href="#" className="nav-link text-sm">Community</a>
-        </div>
+            {scene === 'paper' ? <IconMoon size="large" /> : <IconSun size="large" />}
+          </button>
 
-        <div className="flex gap-4">
-          <Button theme="borderless" className="!rounded-full font-bold !text-gray-600">Login</Button>
           <Link to="/home">
-            <Button 
-              style={{ backgroundColor: '#0052d9', color: '#fff' }} 
-              className="!rounded-full !px-6 font-bold"
+            <Button
+              className="!rounded-full !px-8 !py-5 !font-bold shadow-lg"
+              style={{
+                backgroundColor: scene === 'paper' ? '#000' : '#fff',
+                color: scene === 'paper' ? '#fff' : '#000'
+              }}
             >
-              Get Started
+              Enter Hub
             </Button>
           </Link>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center text-center z-10 px-6">
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 pt-24 pb-32">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center"
         >
-          <Title className="!text-7xl !font-black !mb-6 tracking-tighter text-black">
-            Meet <span style={{ color: '#0052d9' }}>小小</span>
-          </Title>
-          <Paragraph className="!text-2xl text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed font-medium">
-            The next generation of personal connection for the <span className="text-black">黄犬</span> community.
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 glass-card border-[var(--glass-border)]">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <Text className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-main)' }}>
+              Koken Beta v2.0
+            </Text>
+          </div>
+
+          <div className="relative inline-block mb-6">
+            {/* The Pink-to-Peach Watercolor Splash */}
+            <div
+              className="absolute inset-0 bg-gradient-to-r from-[#ff7eb3] to-[#ffb380] blur-[50px] rounded-full pointer-events-none transition-opacity duration-700"
+              style={{
+                opacity: scene === 'paper' ? 0.45 : 0,
+                transform: 'scale(1.4) translateY(10%)'
+              }}
+            />
+
+            <Title className="!text-7xl md:!text-[6rem] !font-black !m-0 tracking-tighter relative z-10" style={{ color: 'var(--text-main)' }}>
+              Hello, <span className="hero-gradient-text">小小</span>.
+            </Title>
+          </div>
+
+          <Paragraph className="!text-2xl max-w-2xl mx-auto mb-16 leading-relaxed font-medium" style={{ color: 'var(--text-muted)' }}>
+            Step into the next generation of personal connection.
+            Designed exclusively for the <span style={{ color: 'var(--text-main)' }}>黄犬</span> community.
           </Paragraph>
 
           <Link to="/home">
-            <Button 
-              size="large" 
-              className="!h-16 !px-12 !rounded-2xl !text-lg font-bold shadow-2xl shadow-blue-200"
-              style={{ backgroundColor: '#0052d9', color: '#fff' }}
+            <Button
+              size="large"
+              className="!h-16 !px-12 !rounded-full !text-lg font-bold shadow-2xl transition-transform hover:scale-105"
+              style={{ backgroundColor: '#0052d9', color: '#fff', border: 'none' }}
               icon={<IconArrowRight />}
               iconPosition="right"
             >
-              Enter Koken
+              Get Started
             </Button>
           </Link>
 
-          {/* Floating Ken-chan */}
-          <div className="mt-20 relative">
-            <motion.div 
-              animate={{ y: [0, -20, 0], rotate: [0, 2, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-block"
-            >
-              <img 
-                src={kenChanImg} 
-                className="h-72 w-72 rounded-[50px] shadow-[0_40px_80px_rgba(0,0,0,0.1)] border-[12px] border-white"
-                alt="Ken-chan"
+          {/* Dreamy Floating Mascot Array */}
+          <div className="mt-28 relative">
+            {/* The soft glowing shadow behind the image */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-300 rounded-[50px] blur-3xl opacity-30"></div>
+
+            <motion.div className="relative glass-card p-3 inline-block float-element">
+              <img
+                src={kenChanImg}
+                className="h-80 w-80 rounded-[35px] object-cover"
+                alt="Ken-chan (小小)"
               />
-              <div className="absolute -bottom-6 -right-6 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/50">
-                <Text className="font-bold text-blue-600">Active Beta v2</Text>
+
+              {/* Cute "Space Milk" style floating badge */}
+              <div className="absolute -bottom-8 -right-8 glass-card p-5 rounded-3xl flex flex-col items-start gap-1">
+                <Text className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Assistant</Text>
+                <Text className="text-lg font-bold" style={{ color: 'var(--text-main)' }}>Ken-chan Online</Text>
               </div>
             </motion.div>
           </div>
         </motion.div>
       </main>
 
-      <footer className="py-10 px-10 z-10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 opacity-40 hover:opacity-100 transition-opacity">
-          <Text className="text-xs font-bold tracking-widest uppercase">Koken Communications · 2026</Text>
-          <div className="flex gap-6 text-xs font-bold">
-            <span className="cursor-pointer">PRC ICP 备 000000号</span>
-            <span className="cursor-pointer">Privacy</span>
+      <footer className="py-12 px-10 z-10 relative">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6" style={{ color: 'var(--text-muted)' }}>
+          <Text className="text-xs font-bold tracking-widest uppercase" style={{ color: 'inherit' }}>
+            Koken Communications · 2026
+          </Text>
+          <div className="flex gap-8 text-xs font-bold">
+            <span className="cursor-pointer hover:opacity-70 transition-opacity">PRC ICP 备 000000号</span>
+            <span className="cursor-pointer hover:opacity-70 transition-opacity">Privacy & Terms</span>
           </div>
         </div>
       </footer>

@@ -1,17 +1,15 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-export type TreatScene = "midnight" | "paper";
-
-type TreatSiteStore = {
+interface TreatSiteState {
+  scene: 'paper' | 'midnight';
   activeFeature: string;
-  scene: TreatScene;
-  setActiveFeature: (feature: string) => void;
-  setScene: (scene: TreatScene) => void;
-};
+  setScene: (scene: 'paper' | 'midnight') => void;
+  setActiveFeature: (id: string) => void;
+}
 
-export const useTreatSiteStore = create<TreatSiteStore>((set) => ({
-  activeFeature: "calling",
-  scene: "midnight",
-  setActiveFeature: (activeFeature) => set({ activeFeature }),
+export const useTreatSiteStore = create<TreatSiteState>((set) => ({
+  scene: 'paper',
+  activeFeature: 'calling',
   setScene: (scene) => set({ scene }),
+  setActiveFeature: (id) => set({ activeFeature: id }),
 }));

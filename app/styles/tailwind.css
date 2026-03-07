@@ -19,192 +19,179 @@
 }
 
 :root {
-  --qq-blue: #0052d9;
-  --koken-gold: #ffb11b; /* Soft yellow for our Golden Retriever mascot */
-  --shimmer-1: rgba(0, 164, 255, 0.15);
-  --shimmer-2: rgba(254, 123, 112, 0.1);
-  --shimmer-3: rgba(255, 177, 27, 0.12);
+  font-family: "HarmonyOS Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  transition: background-color 0.5s ease;
 }
+
+/* --- THEMES: PEARLESCENT (LIGHT) & TWILIGHT (DARK) --- */
+
+#site-root[data-scene="midnight"] {
+  --app-bg: #090616;
+  /* Deep space indigo */
+  --nav-bg: rgba(9, 6, 22, 0.4);
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(20, 15, 40, 0.4);
+
+  /* Huawei Twilight: Deep Purple, Cyan, Royal Blue */
+  --beam-1: rgba(0, 230, 255, 0.4);
+  /* Cyan */
+  --beam-2: rgba(110, 40, 255, 0.5);
+  /* Deep Purple */
+  --beam-3: rgba(0, 100, 255, 0.4);
+  /* Royal Blue */
+  --beam-4: rgba(255, 0, 128, 0.2);
+  /* Magenta hint */
+  --blend-mode: screen;
+}
+
+#site-root[data-scene="paper"] {
+  --app-bg: #f8f9fb;
+  /* Warm pearl white */
+  --nav-bg: rgba(255, 255, 255, 0.5);
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+
+  /* Huawei Pearlescent: Bright Gold, Icy Cyan, Soft Peach */
+  --beam-1: rgba(255, 225, 100, 0.6);
+  /* Bright Gold */
+  --beam-2: rgba(0, 240, 255, 0.4);
+  /* Icy Cyan */
+  --beam-3: rgba(255, 160, 180, 0.5);
+  /* Soft Peach/Pink */
+  --beam-4: rgba(180, 200, 255, 0.5);
+  /* Soft Lavender */
+  --blend-mode: normal;
+}
+
+/* --- THE SHIMMERING IRIDESCENT ENGINE --- */
 
 .qq-landing-body {
-  background-color: #ffffff;
-  overflow-x: hidden;
-  color: #000;
-}
-
-/* The Breeze Animation */
-.breeze-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background: radial-gradient(circle at 50% 50%, #fff, #f7f9fc);
-}
-
-.orb {
-  position: absolute;
-  width: 800px;
-  height: 800px;
-  filter: blur(80px);
-  opacity: 0.6;
-  border-radius: 50%;
-  animation: drift 25s infinite alternate ease-in-out;
-}
-
-@keyframes drift {
-  0% { transform: translate(-10%, -10%) scale(1); }
-  50% { transform: translate(10%, 15%) scale(1.1); }
-  100% { transform: translate(-5%, 5%) scale(0.9); }
-}
-
-/* Semi-UI Dropdown overrides for that "Soft Rounded" look */
-.semi-dropdown, .semi-popover-content {
-  border-radius: 18px !important;
-  border: 1px solid rgba(0,0,0,0.05) !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
-  padding: 8px !important;
-}
-
-.nav-link {
-  font-weight: 500;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: var(--qq-blue);
-}
-
-#site-root {
-  --treat-accent: #00f2ea; /* TikTok Cyan */
-  --treat-pop: #ff0050;    /* TikTok Magenta */
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* MIDNIGHT SCENE: Huawei "Twilight" & "Midnight Blue"
-   Deep Navy base with a Purple-to-Blue-to-Teal gradient.
-*/
-#site-root[data-scene="midnight"] {
-  --treat-bg: #000b1a; /* Midnight Blue */
-  --treat-bg-soft: rgba(0, 18, 40, 0.85);
-  --treat-card: rgba(10, 25, 47, 0.6);
-  --treat-border: rgba(255, 255, 255, 0.1);
-  --treat-text: #ffffff; /* Absolute white for best contrast */
-  --treat-muted: #94a3b8;
-  --treat-kicker: #00f2ea;
-  --treat-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-  /* Huawei Twilight Gradient */
-  --treat-gradient: linear-gradient(135deg, #3d2b7d 0%, #254d91 50%, #16817a 100%);
-  --treat-background: 
-    radial-gradient(circle at top left, rgba(61, 43, 125, 0.15), transparent 40%),
-    linear-gradient(180deg, #000b1a 0%, #001229 100%);
-}
-
-/* PAPER DAY SCENE: QQ / Tencent White
-   Crisp, clean, and professional with high contrast.
-*/
-#site-root[data-scene="paper"] {
-  --treat-bg: #ffffff;
-  --treat-bg-soft: #f0f2f5;
-  --treat-card: rgba(255, 255, 255, 0.9);
-  --treat-border: rgba(0, 0, 0, 0.08);
-  --treat-text: #1a1a1a; /* High-contrast black */
-  --treat-muted: #4b5563; /* Darker grey for readability */
-  --treat-kicker: #0052d9;
-  --treat-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-  --treat-gradient: linear-gradient(135deg, #0052d9 0%, #00a4ff 100%);
-}
-
-.treat-shell {
-  background: var(--treat-bg);
-  color: var(--treat-text);
+  background-color: var(--app-bg);
+  color: var(--text-main);
   min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.8s ease;
 }
 
-.treat-panel {
-  border: 1px solid var(--treat-border);
-  background: var(--treat-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
+.shimmer-container {
+  position: fixed;
+  inset: -20%;
+  /* Bleed past the edges to hide hard stops */
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.treat-gradient-text {
-  background: var(--treat-gradient);
+/* We use tall vertical beams to mimic light striking a curved phone back */
+.beam {
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  width: 40vw;
+  filter: blur(90px);
+  mix-blend-mode: var(--blend-mode);
+  border-radius: 100%;
+  opacity: 0.85;
+}
+
+@keyframes pan-left-right {
+  0% {
+    transform: translateX(-20vw) rotate(15deg) scaleY(1.2);
+  }
+
+  50% {
+    transform: translateX(30vw) rotate(-5deg) scaleY(1);
+  }
+
+  100% {
+    transform: translateX(-10vw) rotate(10deg) scaleY(1.1);
+  }
+}
+
+@keyframes pan-right-left {
+  0% {
+    transform: translateX(60vw) rotate(-15deg) scaleY(1);
+  }
+
+  50% {
+    transform: translateX(10vw) rotate(5deg) scaleY(1.2);
+  }
+
+  100% {
+    transform: translateX(50vw) rotate(-10deg) scaleY(1.1);
+  }
+}
+
+.beam-1 {
+  background: var(--beam-1);
+  left: 0%;
+  animation: pan-left-right 25s infinite alternate ease-in-out;
+}
+
+.beam-2 {
+  background: var(--beam-2);
+  left: 30%;
+  animation: pan-right-left 30s infinite alternate ease-in-out;
+}
+
+.beam-3 {
+  background: var(--beam-3);
+  left: 50%;
+  animation: pan-left-right 28s infinite alternate-reverse ease-in-out;
+}
+
+.beam-4 {
+  background: var(--beam-4);
+  right: 0%;
+  animation: pan-right-left 35s infinite alternate ease-in-out;
+}
+
+/* --- DREAMY GLASSMORPHISM --- */
+
+.glass-nav {
+  background: var(--nav-bg);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+  border-radius: 40px;
+  /* "Space Milk" soft puffy corners */
+}
+
+/* Typography Gradient specifically for the Hero text */
+.hero-gradient-text {
+  background: linear-gradient(135deg, var(--beam-1), var(--beam-2));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  filter: saturate(1.5) brightness(1.2);
 }
 
-.treat-kicker {
-  color: var(--treat-kicker) !important;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.7rem;
-  font-weight: 700;
+/* Unified Float for the Mascot */
+@keyframes dreamy-float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
 }
 
-/* Smooth "As a whole" float for UI sections */
-@keyframes soft-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-.float-group {
-  animation: soft-float 8s ease-in-out infinite;
-}
-
-.treat-cta-primary {
-  background: var(--treat-gradient) !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
-}
-
-.treat-qr-panel {
-  padding: 1rem;
-  background: white;
-  border-radius: 12px;
-  width: 140px;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(0,0,0,0.05);
-}
-
-/* QQ Shimmering Background */
-.breeze-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.orb {
-  position: absolute;
-  width: 70vw;
-  height: 70vw;
-  max-width: 1000px;
-  max-height: 1000px;
-  filter: blur(120px);
-  border-radius: 999px;
-  animation: drift 20s infinite alternate ease-in-out;
-}
-
-@keyframes drift {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(5%, 10%) scale(1.1); }
-}
-
-.nav-link {
-  transition: all 0.2s ease;
-  color: #666;
-  font-weight: 600;
-}
-
-.nav-link:hover {
-  color: #0052d9;
+.float-element {
+  animation: dreamy-float 8s ease-in-out infinite;
 }
