@@ -1,5 +1,5 @@
 import React from 'react';
-import CinematicQQBackground from './components/CinematicQQBackground';
+import CinematicQQBackground from './components/CinematicQQBackground_noblur';
 
 function App() {
   return (
